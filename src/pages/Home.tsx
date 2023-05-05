@@ -100,27 +100,29 @@ const Home = () => {
 	}, [categoryId, searchValue, sort, sortOrder, currentPage]) // sort
 
 	return (
-		<div className='container'>
-			<div className='content__top'>
-				<Categories />
-				<SortPopup />
+		<>
+			<div className='container'>
+				<div className='content__top'>
+					<Categories />
+					<SortPopup />
+				</div>
+				<h2 className='content__title'> Всё мороженое </h2>
+				{status === 'error' ? (
+					<div className='content__error-info'>
+						<h2> Произошла ошибка 😕 </h2>
+						<p>
+							К сожелению, не удалось получить мороженое. Попробуйте повторить
+							попытку позже
+						</p>
+					</div>
+				) : (
+					<div className='content__items'>
+						{status === 'loading' ? skeletons : icecreams}
+					</div>
+				)}
+				<Pagination />
 			</div>
-			<h2 className='content__title'> Всё мороженое </h2>
-			{status === 'error' ? (
-				<div className='content__error-info'>
-					<h2> Произошла ошибка 😕 </h2>
-					<p>
-						К сожелению, не удалось получить мороженое. Попробуйте повторить
-						попытку позже
-					</p>
-				</div>
-			) : (
-				<div className='content__items'>
-					{status === 'loading' ? skeletons : icecreams}
-				</div>
-			)}
-			<Pagination />
-		</div>
+		</>
 	)
 }
 
